@@ -142,7 +142,7 @@ def minimax(state, depth, player):
 Below, the best move is on the middle because the max value is on 2nd node on left.
 
 <p align="center">
-	<img src="preview/tic-tac-toe-minimax-game-tree.png"></img>
+	<img src="tic-tac-toe-minimax-game-tree.png"></img>
 </p>
 
 Take a look that the depth is equal the valid moves on the board. The complete code is available in **py_version/**.
@@ -150,7 +150,7 @@ Take a look that the depth is equal the valid moves on the board. The complete c
 Simplified game tree:
 
 <p align="center">
-	<img src="preview/simplified-g-tree.png"></img>
+	<img src="simplified-g-tree.png"></img>
 </p>
 
 That tree has 11 nodes. The full game tree has 549.946 nodes! You can test it putting a static global variable in your program and incrementing it for each minimax function call per turn.
