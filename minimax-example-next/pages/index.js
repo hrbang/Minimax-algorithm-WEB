@@ -1,9 +1,20 @@
-import React, { useState } from "react"
-
+import React, { useState, useEffect } from "react"
+import ReactMarkdown from "react-markdown"
+import remarkLint from "remark-lint"
+import remarkGfm from "remark-gfm"
 import Head from "next/head"
+import Link from "next/link"
 
-export default function Home({ repos }) {
-    const [open, setOpen] = useState(null)
+export default function Home() {
+    const [markdown, setMarkdown] = useState("")
+
+    useEffect(() => {
+        import(`../public/Readme.md`)
+            .then((res) => {
+                setMarkdown(res.default)
+            })
+            .catch((err) => console.log(err))
+    })
 
     return (
         <>
@@ -11,60 +22,41 @@ export default function Home({ repos }) {
                 <title>Minimax Tic-Tac-Toe</title>
             </Head>
             <div id="root">
-                <div className="minimax-wrapper">
-                    <table id="tab-tic-tac-toe" cellSpacing="0">
-                        <tbody>
-                            <tr>
-                                <td id="00" />
-                                <td id="01" />
-                                <td id="02" />
-                            </tr>
-                            <tr>
-                                <td id="10" />
-                                <td id="11" />
-                                <td id="12" />
-                            </tr>
-                            <tr>
-                                <td id="20" />
-                                <td id="21" />
-                                <td id="22" />
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div className="control-wrapper">
-                        <input type="button" value="Start AI" id="bnt-restart" />
-                        <button type="button" className="information-btn" onClick={(e) => setOpen(true)}>
-                            ?
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div className={open == true ? "modal open" : "modal"}>
-                <div className="modal-inner">
-                    <div className="modal-header">
-                        <div className="modal-title">
-                            <h2 className="title">{repos.name}</h2>
-                        </div>
-                        <div className="modal-close" onClick={(e) => setOpen(false)}>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM10 0C4.47 0 0 4.47 0 10C0 15.53 4.47 20 10 20C15.53 20 20 15.53 20 10C20 4.47 15.53 0 10 0ZM12.59 6L10 8.59L7.41 6L6 7.41L8.59 10L6 12.59L7.41 14L10 11.41L12.59 14L14 12.59L11.41 10L14 7.41L12.59 6Z" fill="black" />
-                            </svg>
+                <div className="content">
+                    <div className="minimax-wrapper">
+                        <table id="tab-tic-tac-toe" cellSpacing="0">
+                            <tbody>
+                                <tr>
+                                    <td id="00" />
+                                    <td id="01" />
+                                    <td id="02" />
+                                </tr>
+                                <tr>
+                                    <td id="10" />
+                                    <td id="11" />
+                                    <td id="12" />
+                                </tr>
+                                <tr>
+                                    <td id="20" />
+                                    <td id="21" />
+                                    <td id="22" />
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div className="control-wrapper">
+                            <input type="button" value="Start AI" id="bnt-restart" />
                         </div>
                     </div>
-                    <div className="modal-body"></div>
+                    <div className="description">
+                        <div className="desc-inner">
+                            <div className="markdown-body">
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+                                <p className="link">Check out the repository <Link href="https://github.com/hrbang/Minimax-algorithm-WEB"><a>Here</a></Link></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
     )
-}
-
-export async function getServerSideProps({ previewData }) {
-    const res = await fetch("https://api.github.com/repos/hrbang/Minimax-algorithm-PY")
-    const repos = await res.json()
-
-    return {
-        props: {
-            repos: repos,
-        },
-    }
 }

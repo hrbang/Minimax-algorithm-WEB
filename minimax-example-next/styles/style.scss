@@ -1,166 +1,145 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap");
+@import "./markdown-style.scss";
 
 body {
-    font-family: 'Noto Sans', sans-serif;
-	margin: 0;
-	padding: 0;
+    font-family: "Noto Sans", sans-serif;
+    margin: 0;
+    padding: 0;
     background-color: #fafafa;
     height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-y: hidden;
+    overflow: hidden;
 
-    /* Table Styles */
-    #tab-tic-tac-toe {
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 4em;
-        font-family: Sans;
-        color: #444;
-        background: #fff;
-        width: 510px;
-        height: 500px;
-        text-align: center;
-        vertical-align: center;
-        border: 2px solid #181818;
-    }
-    
-    /*Column style*/
-    #tab-tic-tac-toe td {
-        transition: background-color 100ms ease-in-out;
-        border-left: 2px solid #181818;
-        border-bottom: 2px solid #181818;
-    }
-    
-    #tab-tic-tac-toe td:first-child {
-        border-left: none;
-    }
-    
-    #tab-tic-tac-toe tr:last-child td {
-        border-bottom: none;
-    }
-    
-    /*Cells*/
-    #tab-tic-tac-toe td {
-        cursor: pointer;
-        height: 95px;
-        width: 95px;
-    }
-    
-    #tab-tic-tac-toe td:hover {
-        background: #e8e8e8;
-    }
-
-    /* Button styles */
-
-    .control-wrapper {
-        margin-top: 50px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        #bnt-restart {
-            font-family: 'Noto Sans', sans-serif;
-            margin-right: 10px;
-            font-weight: 600;
-            padding: 10px;
-            width: 200px;
-            background: transparent;
-            font-size: .9em;
-            text-transform: uppercase;
-            color: #181818;
-            border: 2px solid #181818;
-            cursor: pointer;
-            transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
-
-            &:hover {
-                background: #181818;
-                color: #fff;
-            }
-
-            &:active {
-                background: #181818;
-            }
-
-            &:disabled {
-                color: #444;
-                background: #CECECE;
-            }
-
-        }
-
-        .information-btn {
-            font-family: 'Noto Sans', sans-serif;
-            height: 100%;
-            font-weight: 600;
-            width: 43px;
-            padding: 10px;
-            font-size: .9em;
-            color: #181818;
-            border: 2px solid #181818;
-            cursor: pointer;
-            background: transparent;
-            display: block;
-            transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
-
-            &:hover {
-                background: #181818;
-                color: #fff;
-            }
-
-            &:active {
-                background: #181818;
-            }
-
-            &:disabled {
-                color: #444;
-                background: #CECECE;
-            }
-
-        }
-
-
-    }
-
-    .modal {
-        z-index: -1;
-        position: absolute;
-        left: 0;
-        top: 0;
+    .content {
         width: 100%;
         height: 100%;
-        opacity: 0;
-        transition: opacity 100ms ease-in-out;
-        background-color: rgba(0, 0, 0, 0.5);
         display: flex;
-            justify-content: center;
+        align-items: center;
 
-        &.open {
-            opacity: 1;
-            z-index: 100;
-        }
+        .minimax-wrapper {
+            width: 50%;
 
-        .modal-inner {
-            border-radius: 10px;
-            overflow-y: auto;
-            margin-top: 50px;
-            height: 100%;
-            width: 900px;
-            background-color: #fff;
+            /* Table Styles */
+            #tab-tic-tac-toe {
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 4em;
+                font-family: Sans;
+                color: #444;
+                background: #fff;
+                width: 510px;
+                height: 500px;
+                text-align: center;
+                vertical-align: center;
+                border: 2px solid #181818;
+            }
 
-            .modal-header {
+            /*Column style*/
+            #tab-tic-tac-toe td {
+                transition: background-color 100ms ease-in-out;
+                border-left: 2px solid #181818;
+                border-bottom: 2px solid #181818;
+            }
+
+            #tab-tic-tac-toe td:first-child {
+                border-left: none;
+            }
+
+            #tab-tic-tac-toe tr:last-child td {
+                border-bottom: none;
+            }
+
+            /*Cells*/
+            #tab-tic-tac-toe td {
+                cursor: pointer;
+                height: 95px;
+                width: 95px;
+            }
+
+            #tab-tic-tac-toe td:hover {
+                background: #e8e8e8;
+            }
+
+            /* Button styles */
+
+            .control-wrapper {
+                margin-top: 50px;
+                width: 100%;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
-                padding: 0px 25px;
-                border-bottom: 1px solid #181818;
+                justify-content: center;
+
+                #bnt-restart {
+                    font-family: "Noto Sans", sans-serif;
+                    margin-right: 10px;
+                    font-weight: 600;
+                    padding: 10px 65px;
+                    background: transparent;
+                    font-size: 0.9em;
+                    text-transform: uppercase;
+                    color: #181818;
+                    border: 2px solid #181818;
+                    cursor: pointer;
+                    transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
+
+                    &:hover {
+                        background: #181818;
+                        color: #fff;
+                    }
+
+                    &:active {
+                        background: #181818;
+                    }
+
+                    &:disabled {
+                        color: #444;
+                        background: #cecece;
+                    }
+                }
+
+                .information-btn {
+                    font-family: "Noto Sans", sans-serif;
+                    height: 100%;
+                    font-weight: 600;
+                    padding: 10px 25px;
+                    font-size: 0.9em;
+                    color: #181818;
+                    border: 2px solid #181818;
+                    cursor: pointer;
+                    background: transparent;
+                    display: block;
+                    transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
+
+                    &:hover {
+                        background: #181818;
+                        color: #fff;
+                    }
+
+                    &:active {
+                        background: #181818;
+                    }
+
+                    &:disabled {
+                        color: #444;
+                        background: #cecece;
+                    }
+                }
+            }
+        }
+
+        .description {
+            width: 50%;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f3f3f373;
+
+            .desc-inner {
+                padding: 45px;
             }
 
         }
-
     }
-
 }
