@@ -6,6 +6,8 @@ import Link from "next/link"
 
 export default function Home() {
     const [markdown, setMarkdown] = useState("");
+    const [isDraw, setIsDraw] = useState(null);
+    const [isLose, setIsLose] = useState(null);
 
     var HUMAN = -1;
     var COMP = +1;
@@ -210,11 +212,11 @@ export default function Home() {
     }
 
     const restartGame = (e) => {
-        if (e.value == "Start AI") {
+        if (e.target.value == "Start AI") {
             aiTurn();
-            e.disabled = true;
+            e.target.disabled = true;
         }
-        else if (e.value == "Restart") {
+        else if (e.target.value == "Restart") {
             var htmlBoard;
             var msg;
 
@@ -226,7 +228,7 @@ export default function Home() {
                     htmlBoard.innerHTML = "";
                 }
             }
-            e.value = "Start AI";
+            e.target.value = "Start AI";
             msg = document.getElementById("message");
             msg.innerHTML = "";
         }
@@ -239,8 +241,6 @@ export default function Home() {
             })
             .catch((err) => console.log(err))
     })
-
-
 
     return (
         <>
