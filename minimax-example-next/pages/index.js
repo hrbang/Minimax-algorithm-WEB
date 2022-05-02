@@ -6,8 +6,10 @@ import Link from "next/link"
 
 export default function Home() {
     const [markdown, setMarkdown] = useState("");
+    const [isOpen, setIsOpen] = useState(null);
     const [isDraw, setIsDraw] = useState(null);
     const [isLose, setIsLose] = useState(null);
+    const [isHovered, setIsHovered] = useState(null);
 
     var HUMAN = -1;
     var COMP = +1;
@@ -174,7 +176,6 @@ export default function Home() {
         if (gameOver(board, COMP)) {
             var lines;
             var cell;
-            var msg;
 
             if (board[0][0] == 1 && board[0][1] == 1 && board[0][2] == 1)
                 lines = [[0, 0], [0, 1], [0, 2]];
@@ -198,12 +199,12 @@ export default function Home() {
                 cell.style.color = "red";
             }
 
-            msg = document.getElementById("message");
-            msg.innerHTML = "You lose!";
+            setIsLose(true);
+            setIsOpen(true);
         }
         if (emptyCells(board).length == 0 && !gameOverAll(board)) {
-            var msg = document.getElementById("message");
-            msg.innerHTML = "Draw!";
+            setIsDraw(true);
+            setIsOpen(true);
         }
         if (gameOverAll(board) == true || emptyCells(board).length == 0) {
             button.value = "Restart";
@@ -218,7 +219,6 @@ export default function Home() {
         }
         else if (e.target.value == "Restart") {
             var htmlBoard;
-            var msg;
 
             for (var x = 0; x < 3; x++) {
                 for (var y = 0; y < 3; y++) {
@@ -229,9 +229,11 @@ export default function Home() {
                 }
             }
             e.target.value = "Start AI";
-            msg = document.getElementById("message");
-            msg.innerHTML = "";
         }
+    }
+
+    const restartGameRefresh = (e) => {
+        window.location.reload(true);
     }
 
     useEffect(() => {
@@ -280,6 +282,54 @@ export default function Home() {
                                 <p className="link">Check out the repository <Link href="https://github.com/hrbang/Minimax-algorithm-WEB"><a>Here</a></Link></p>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div className={isOpen == true ? "modal is-open" : "modal"}>
+                    <div className="modal-inner">
+                        <div className="modal-body">
+                            <div className="modal-body-inner">
+                                <div className="body-icon">
+                                    {isDraw == true && (
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.75 12.25L14.25 3.75V1.75H12.25L3.75 10.25M2.75 9.25L4.25 11.75L6.25 13.25L2.75 9.25ZM1.75 13.25L2.75 14.25L1.75 13.25ZM4.25 11.75L2.75 13.25L4.25 11.75Z" stroke="#181616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M6 8L1.75 3.75V1.75H3.75L8 6M10.25 12.25L8 10L10.25 12.25ZM10 8L12.25 10.25L10 8ZM13.25 9.25L11.75 11.75L9.75 13.25L13.25 9.25ZM14.25 13.25L13.25 14.25L14.25 13.25ZM11.75 11.75L13.25 13.25L11.75 11.75Z" stroke="#181616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    )}
+                                    {isLose == true && (
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 12L16 16" stroke="#181616" stroke-width="2" stroke-linecap="round" />
+                                            <path d="M12 12L8 8" stroke="#181616" stroke-width="2" stroke-linecap="round" />
+                                            <path d="M12 12L8 16" stroke="#181616" stroke-width="2" stroke-linecap="round" />
+                                            <path d="M12 12L16 8" stroke="#181616" stroke-width="2" stroke-linecap="round" />
+                                            <path d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z" stroke="#181616" stroke-width="2" stroke-linecap="round" />
+                                        </svg>
+                                    )}
+                                </div>
+                                <div className="body-text">
+                                    <h2 className="text">
+                                        {isLose == true && (
+                                            "The AI wins, you lost"
+                                        )}
+                                        {isDraw == true && (
+                                            "The game is draw!"
+                                        )}
+                                    </h2>
+                                </div>
+                                <div className="modal-restart">
+                                    <button type="button" className="restart" onClick={((e) => restartGameRefresh(e))}>Restart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={isHovered == true ? "copyright is-hovered" : "copyright"} onMouseEnter={(e) => setIsHovered(true)} onMouseLeave={(e) => setIsHovered(false)}>
+                    <div className="copyright-icon">
+                        <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.25 13.5C10.7018 13.5 13.5 10.7018 13.5 7.25C13.5 3.79822 10.7018 1 7.25 1C3.79822 1 1 3.79822 1 7.25C1 10.7018 3.79822 13.5 7.25 13.5Z" stroke="#181616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M9.25 6C9.25 6 8.5 5 7.25 5C6 5 5 6 5 7.25C5 8.5 6 9.5 7.25 9.5C8.5 9.5 9.25 8.5 9.25 8.5" stroke="#181616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <p><Link href="https://jonas-bang.com"><a>Jonas Bang 2022</a></Link> - Under the MIT license</p>
                     </div>
                 </div>
             </div>
