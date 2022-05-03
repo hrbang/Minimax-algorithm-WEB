@@ -317,17 +317,17 @@ export default function Home() {
                                 <div className="body-icon">
                                     {isDraw == true && (
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5.75 12.25L14.25 3.75V1.75H12.25L3.75 10.25M2.75 9.25L4.25 11.75L6.25 13.25L2.75 9.25ZM1.75 13.25L2.75 14.25L1.75 13.25ZM4.25 11.75L2.75 13.25L4.25 11.75Z" stroke="#181616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M6 8L1.75 3.75V1.75H3.75L8 6M10.25 12.25L8 10L10.25 12.25ZM10 8L12.25 10.25L10 8ZM13.25 9.25L11.75 11.75L9.75 13.25L13.25 9.25ZM14.25 13.25L13.25 14.25L14.25 13.25ZM11.75 11.75L13.25 13.25L11.75 11.75Z" stroke="#181616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5.75 12.25L14.25 3.75V1.75H12.25L3.75 10.25M2.75 9.25L4.25 11.75L6.25 13.25L2.75 9.25ZM1.75 13.25L2.75 14.25L1.75 13.25ZM4.25 11.75L2.75 13.25L4.25 11.75Z" stroke="#181616" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M6 8L1.75 3.75V1.75H3.75L8 6M10.25 12.25L8 10L10.25 12.25ZM10 8L12.25 10.25L10 8ZM13.25 9.25L11.75 11.75L9.75 13.25L13.25 9.25ZM14.25 13.25L13.25 14.25L14.25 13.25ZM11.75 11.75L13.25 13.25L11.75 11.75Z" stroke="#181616" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     )}
                                     {isLose == true && (
                                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 12L16 16" stroke="#181616" stroke-width="2" stroke-linecap="round" />
-                                            <path d="M12 12L8 8" stroke="#181616" stroke-width="2" stroke-linecap="round" />
-                                            <path d="M12 12L8 16" stroke="#181616" stroke-width="2" stroke-linecap="round" />
-                                            <path d="M12 12L16 8" stroke="#181616" stroke-width="2" stroke-linecap="round" />
-                                            <path d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z" stroke="#181616" stroke-width="2" stroke-linecap="round" />
+                                            <path d="M12 12L16 16" stroke="#181616" strokeWidth="2" strokeLinecap="round" />
+                                            <path d="M12 12L8 8" stroke="#181616" strokeWidth="2" strokeLinecap="round" />
+                                            <path d="M12 12L8 16" stroke="#181616" strokeWidth="2" strokeLinecap="round" />
+                                            <path d="M12 12L16 8" stroke="#181616" strokeWidth="2" strokeLinecap="round" />
+                                            <path d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z" stroke="#181616" strokeWidth="2" strokeLinecap="round" />
                                         </svg>
                                     )}
                                 </div>
