@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import Head from "next/head"
@@ -9,7 +9,7 @@ export default function Home() {
     const [isOpen, setIsOpen] = useState(null)
     const [isDraw, setIsDraw] = useState(null)
     const [isLose, setIsLose] = useState(null)
-    const [isHovered, setIsHovered] = useState(null)
+    const [markdownWindow, setMarkdownWindow] = useState(null)
 
     var HUMAN = -1
     var COMP = +1
@@ -255,6 +255,10 @@ export default function Home() {
         window.location.reload(true)
     }
 
+    const markdownModal = (e) => {
+        setMarkdownWindow(true)
+    }
+
     useEffect(() => {
         import(`../public/Readme.md`)
             .then((res) => {
@@ -269,6 +273,10 @@ export default function Home() {
                 <title>Minimax Tic-Tac-Toe</title>
             </Head>
             <div id="root">
+                <div className="small-device">
+                    <p className="text"><span>Small device detected!</span><br /><br />A device smaller than 768px has been detected</p>
+                </div>
+
                 <div className="content">
                     <div className="minimax-wrapper">
                         <table id="tab-tic-tac-toe" cellSpacing="0">
@@ -292,7 +300,7 @@ export default function Home() {
                         </table>
                         <div className="control-wrapper">
                             <input type="button" value="Start AI" id="bnt-restart" onClick={(e) => restartGame(e)} />
-                            <input type="button" value="How it works?" id="bnt-how" onClick={(e) => restartGame(e)} />
+                            <input type="button" value="How it works?" id="bnt-how" onClick={(e) => markdownModal(e)} />
                         </div>
                     </div>
                     <div className="description">
@@ -341,6 +349,34 @@ export default function Home() {
                                     <button type="button" className="restart" onClick={(e) => restartGameRefresh(e)}>
                                         Restart
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={markdownWindow == true ? "markdown-modal is-open" : "markdown-modal"}>
+                    <div className="markdown-modal-inner">
+                        <div className="markdown-modal-header">
+                            <div className="modal-title">
+						    	<h2 className="title">How it works</h2>
+						    </div>
+                            <div className="modal-close" onClick={(e) => setMarkdownWindow(false)}>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM10 0C4.47 0 0 4.47 0 10C0 15.53 4.47 20 10 20C15.53 20 20 15.53 20 10C20 4.47 15.53 0 10 0ZM12.59 6L10 8.59L7.41 6L6 7.41L8.59 10L6 12.59L7.41 14L10 11.41L12.59 14L14 12.59L11.41 10L14 7.41L12.59 6Z" fill="black" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="markdown-modal-body">
+                            <div className="markdown-modal-body-inner">
+                                <div className="markdown-body">
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+                                    <p className="link">
+                                        Check out the repository{" "}
+                                        <Link href="https://github.com/hrbang/Minimax-algorithm-WEB">
+                                            <a>Here</a>
+                                        </Link>
+                                    </p>
                                 </div>
                             </div>
                         </div>

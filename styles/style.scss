@@ -13,10 +13,30 @@ body {
     align-items: center;
     overflow: hidden;
 
+    .small-device {
+        padding: 15px;
+        display: none;
+        text-transform: uppercase;
+        @media screen and (max-width: 768px) {
+            display: block;
+        }
+
+        span {
+            font-size: 22px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+    }
+
     .content {
         width: 100%;
         height: 100%;
-        display: block;
+        display: none;
+        
+        @media screen and (min-width: 768px) {
+            display: block;
+        }
 
         @media screen and (min-width: 1200px) {
             display: flex;
@@ -79,7 +99,8 @@ body {
                 align-items: center;
                 justify-content: center;
 
-                #bnt-restart, #bnt-how {
+                #bnt-restart,
+                #bnt-how {
                     font-family: "Noto Sans", sans-serif;
                     margin-right: 10px;
                     font-weight: 600;
@@ -119,7 +140,6 @@ body {
                     @media screen and (min-width: 1200px) {
                         display: none;
                     }
-
                 }
             }
         }
@@ -230,6 +250,50 @@ body {
                     }
                 }
             }
+        }
+    }
+
+    .markdown-modal {
+        z-index: -1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 100ms ease-in-out;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.is-open {
+            opacity: 1;
+            z-index: 100;
+        }
+
+        &-inner {
+            border-radius: 10px;
+            overflow-y: auto;
+            height: 85%;
+            max-width: 100%;
+            width: 85%;
+            background-color: #fff;
+
+            .markdown-modal-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0px 25px;
+                border-bottom: 1px solid #181818;
+            }
+
+            .markdown-modal-body {
+                .markdown-modal-body-inner {
+                    padding: 25px;
+                }
+            }
+
         }
     }
 }
