@@ -1,9 +1,11 @@
 # Minimax Algorithm Tic-Tac-Toe
 
 ## How does it works?
-The algorithm search, recursively, the best move that leads the *Max* player to win or not lose (draw). It consider the current state of the game and the available moves at that state, then for each valid move it plays (alternating *min* and *max*) until it finds a terminal state (win, draw or lose).
+
+The algorithm search, recursively, the best move that leads the _Max_ player to win or not lose (draw). It consider the current state of the game and the available moves at that state, then for each valid move it plays (alternating _min_ and _max_) until it finds a terminal state (win, draw or lose).
 
 ## Understanding Minimax
+
 The algorithm was studied by the book Algorithms in a Nutshell (George Heineman; Gary Pollice; Stanley Selkow, 2009). Pseudocode (adapted):
 
 ```python
@@ -33,10 +35,11 @@ end
 ```
 
 Now we'll see each part of this pseudocode with Python implementation. The Python implementation is available at this repository. First of all, consider it:
+
 > board = [
->	[0, 0, 0],
->	[0, 0, 0],
->	[0, 0, 0]
+> [0, 0, 0],
+> [0, 0, 0],
+> [0, 0, 0]
 > ]
 
 > MAX = +1
@@ -48,9 +51,10 @@ The MAX may be X or O and the MIN may be O or X, whatever. The board is 3x3.
 ```python
 def minimax(state, depth, player):
 ```
-* **state**: the current board in tic-tac-toe (node)
-* **depth**: index of the node in the game tree
-* **player**: may be a *MAX* player or *MIN* player
+
+-   **state**: the current board in tic-tac-toe (node)
+-   **depth**: index of the node in the game tree
+-   **player**: may be a _MAX_ player or _MIN_ player
 
 ```python
 if player == MAX:
@@ -59,7 +63,7 @@ else:
 	return [-1, -1, +infinity]
 ```
 
-Both players start with your worst score. If player is MAX, its score is -infinity. Else if player is MIN, its score is +infinity. **Note:** *infinity* is an alias for inf (from math module, in Python).
+Both players start with your worst score. If player is MAX, its score is -infinity. Else if player is MIN, its score is +infinity. **Note:** _infinity_ is an alias for inf (from math module, in Python).
 
 The best move on the board is [-1, -1] (row and column) for all.
 
@@ -71,9 +75,9 @@ if depth == 0 or game_over(state):
 
 If the depth is equal zero, then the board hasn't new empty cells to play. Or, if a player wins, then the game ended for MAX or MIN. So the score for that state will be returned.
 
-* If MAX won: return +1
-* If MIN won: return -1
-* Else: return 0 (draw)
+-   If MAX won: return +1
+-   If MIN won: return -1
+-   Else: return 0 (draw)
 
 Now we'll see the main part of this code that contains recursion.
 
@@ -87,13 +91,14 @@ for cell in empty_cells(state):
 ```
 
 For each valid moves (empty cells):
-* **x**: receives cell row index
-* **y**: receives cell column index
-* **state[x][y]**: it's like board[available_row][available_col] receives MAX or MIN player
-* **score = minimax(state, depth - 1, -player)**:
-  * state: is the current board in recursion;
-  * depth -1: index of the next state;
-  * -player: if a player is MAX (+1) will be MIN (-1) and vice versa.
+
+-   **x**: receives cell row index
+-   **y**: receives cell column index
+-   **state[x][y]**: it's like board[available_row][available_col] receives MAX or MIN player
+-   **score = minimax(state, depth - 1, -player)**:
+    -   state: is the current board in recursion;
+    -   depth -1: index of the next state;
+    -   -player: if a player is MAX (+1) will be MIN (-1) and vice versa.
 
 The move (+1 or -1) on the board is undo and the row, column are collected.
 
@@ -139,14 +144,15 @@ def minimax(state, depth, player):
 ```
 
 ## Viewing the game tree
+
 Below, the best move is on the middle because the max value is on 2nd node on left.
 
-![Tux, the Linux mascot](tic-tac-toe-minimax-game-tree.png)
+![Tux, the Linux mascot](./public/tic-tac-toe-minimax-game-tree.png)
 
 Take a look that the depth is equal the valid moves on the board. The complete code is available in **py_version/**.
 
 Simplified game tree:
 
-![Tux, the Linux mascot](simplified-g-tree.png)
+![Tux, the Linux mascot](./public/simplified-g-tree.png)
 
 That tree has 11 nodes. The full game tree has 549.946 nodes! You can test it putting a static global variable in your program and incrementing it for each minimax function call per turn.
