@@ -52,9 +52,9 @@ The MAX may be X or O and the MIN may be O or X, whatever. The board is 3x3.
 def minimax(state, depth, player):
 ```
 
--   **state**: the current board in tic-tac-toe (node)
--   **depth**: index of the node in the game tree
--   **player**: may be a _MAX_ player or _MIN_ player
+- **state**: the current board in tic-tac-toe (node)
+- **depth**: index of the node in the game tree
+- **player**: may be a _MAX_ player or _MIN_ player
 
 ```python
 if player == MAX:
@@ -75,9 +75,9 @@ if depth == 0 or game_over(state):
 
 If the depth is equal zero, then the board hasn't new empty cells to play. Or, if a player wins, then the game ended for MAX or MIN. So the score for that state will be returned.
 
--   If MAX won: return +1
--   If MIN won: return -1
--   Else: return 0 (draw)
+- If MAX won: return +1
+- If MIN won: return -1
+- Else: return 0 (draw)
 
 Now we'll see the main part of this code that contains recursion.
 
@@ -92,13 +92,13 @@ for cell in empty_cells(state):
 
 For each valid moves (empty cells):
 
--   **x**: receives cell row index
--   **y**: receives cell column index
--   **state[x][y]**: it's like board[available_row][available_col] receives MAX or MIN player
--   **score = minimax(state, depth - 1, -player)**:
-    -   state: is the current board in recursion;
-    -   depth -1: index of the next state;
-    -   -player: if a player is MAX (+1) will be MIN (-1) and vice versa.
+- **x**: receives cell row index
+- **y**: receives cell column index
+- **state[x][y]**: it's like board[available_row][available_col] receives MAX or MIN player
+- **score = minimax(state, depth - 1, -player)**:
+  - state: is the current board in recursion;
+  - depth -1: index of the next state;
+  - -player: if a player is MAX (+1) will be MIN (-1) and vice versa.
 
 The move (+1 or -1) on the board is undo and the row, column are collected.
 
